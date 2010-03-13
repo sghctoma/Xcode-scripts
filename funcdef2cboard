@@ -1,0 +1,16 @@
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Select a bunch of function declarations, use this script on them, and the
+# definition skeletons will be placed on the clipboard.
+
+import sys
+import string
+import os
+
+
+selection = sys.stdin.read().split('\n')
+
+for function in selection:
+    sys.stdout.write(function[0:len(function) - 1])
+    sys.stdout.write('\n{\n\t\n}\n\n');

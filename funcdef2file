@@ -1,0 +1,29 @@
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Select a bunch of function declarations in a .h file , use this script on
+# them, and the definition skeletons will be written into the appropriate . m
+# file (this one is for Obejctive-C)
+
+import sys
+import string
+import os
+
+
+interface_name = '%%%{PBXFilePath}%%%'
+selection = sys.stdin.read().split('\n')
+
+implementation_name = interface_name[0:len(interface_name) - 1] + 'm'
+implementation_file = open(implementation_name)
+input = implementation_file.readlines()
+implementation_file.close()
+
+implementation_file = open(implementation_name, 'w')
+for line in input:
+    implementation_file.write(line)
+    if line.startswith('@implementation'):
+        implementation_file.write('\n')
+        for function in selection:
+            implementation_file.write(function[0:len(function) - 1])
+            implementation_file.write('\n{\n\t\n}\n\n');
+implementation_file.close()

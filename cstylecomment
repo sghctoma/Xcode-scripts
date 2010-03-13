@@ -1,0 +1,23 @@
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+
+# This script allows one to comment the selected part of the code with a hotkey.
+# The selection will be wrapped in the C-style slash-asterisk-asterisk-slash
+# block comment, or will be uncommented, if it is already wrapped in /**/
+
+import sys
+import string
+
+selection = sys.stdin.read()
+begin_count = selection.count('/*')
+end_count = selection.count('*/')
+
+if begin_count == end_count != 0:
+    selection = selection.replace('/*', '')
+    selection = selection.replace('*/', '')
+else:
+    selection = '/*' + selection + '*/'
+
+sys.stdout.write('%%%{PBXSelection}%%%')
+sys.stdout.write(selection)
+sys.stdout.write('%%%{PBXSelection}%%%')

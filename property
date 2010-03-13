@@ -1,0 +1,14 @@
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Select a bunch of instance variable declarations, use this script on them,
+# and the @property lines will be placed on clipboard. Useful for iPhone
+# development for GUI elements.
+
+import sys
+import string
+
+selection = sys.stdin.read().split("\n");
+for ivar in selection:
+    sys.stdout.write("@property (nonatomic, retain) " + ivar + "\n");
+
